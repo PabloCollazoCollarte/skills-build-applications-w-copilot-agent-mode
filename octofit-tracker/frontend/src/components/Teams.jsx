@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 
-const apiBaseUrl = import.meta.env.VITE_CODESPACE_NAME
-  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
-  : 'http://localhost:8000';
-
-const apiUrl = `${apiBaseUrl}/api/teams/`;
+const apiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+  : 'http://localhost:8000/api/teams/';
 
 const normalizeRecords = (payload) => {
   if (Array.isArray(payload)) return payload;
