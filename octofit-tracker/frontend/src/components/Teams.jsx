@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
 
-const buildApiUrl = (path) => {
-  const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
-  const baseUrl = codespaceName
-    ? `https://${codespaceName}-8000.app.github.dev`
-    : 'http://localhost:8000';
+const apiBaseUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
+  : 'http://localhost:8000';
 
-  return `${baseUrl}${path}`;
-};
+const apiUrl = `${apiBaseUrl}/api/teams/`;
 
 const normalizeRecords = (payload) => {
   if (Array.isArray(payload)) return payload;
@@ -37,7 +34,7 @@ export default function Teams() {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const response = await fetch(buildApiUrl('/api/teams/'));
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error(`Failed to load teams: ${response.status}`);
         }
